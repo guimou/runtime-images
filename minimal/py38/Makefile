@@ -2,8 +2,8 @@
 
 RELEASE ?= $(shell git describe --tags --always --dirty || echo 'dev')
 DATE ?= $(shell date +'%Y%m%d')
-BASE_IMAGE ?= "quay.io/opendatahub-contrib/runtime-images:base-ubi8-py38_${RELEASE}_latest"
-CUDA_BASE_IMAGE ?= "quay.io/opendatahub-contrib/runtime-images:cuda-base-ubi8-py38_${RELEASE}_latest"
+BASE_IMAGE ?= "quay.io/opendatahub-contrib/workbench-images:base-ubi8-py38_${RELEASE}_latest"
+CUDA_BASE_IMAGE ?= "quay.io/opendatahub-contrib/workbench-images:cuda-base-ubi8-py38_${RELEASE}_latest"
 
 default:
 	@echo "Options are:"

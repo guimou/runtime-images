@@ -2,7 +2,7 @@
 
 RELEASE ?= $(shell git describe --tags --always --dirty || echo 'dev')
 DATE ?= $(shell date +'%Y%m%d')
-REPO ?= quay.io/opendatahub-contrib/runtime-images
+REPO ?= quay.io/guimou/runtime-images
 
 default:
 	@echo "This Makefile builds minimal and datascience runtime images"

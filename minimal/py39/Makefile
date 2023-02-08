@@ -2,8 +2,10 @@
 
 RELEASE ?= $(shell git describe --tags --always --dirty || echo 'dev')
 DATE ?= $(shell date +'%Y%m%d')
-BASE_IMAGE ?= "quay.io/opendatahub-contrib/runtime-images:base-ubi9-py39_${RELEASE}_latest"
-CUDA_BASE_IMAGE ?= "quay.io/opendatahub-contrib/runtime-images:cuda-base-ubi9-py39_${RELEASE}_latest"
+BASE_IMAGE ?= "quay.io/opendatahub-contrib/workbench-images:base-ubi9-py39_${RELEASE}_latest"
+CUDA_BASE_IMAGE ?= "quay.io/opendatahub-contrib/workbench-images:cuda-base-ubi9-py39_${RELEASE}_latest"
+C9S_BASE_IMAGE ?= "quay.io/opendatahub-contrib/workbench-images:base-c9s-py39_${RELEASE}_latest"
+C9S_CUDA_BASE_IMAGE ?= "quay.io/opendatahub-contrib/workbench-images:cuda-base-c9s-py39_${RELEASE}_latest"
 
 default:
 	@echo "Options are:"
@@ -36,3 +38,23 @@ cuda-ubi9-py39:
 				--build-arg=PYTHON_VERSION_LONG="Python 3.9" \
 				--build-arg=CUDA="cuda-" \
 				-t runtime-images:cuda-minimal-ubi9-py39_${RELEASE}_${DATE} .
+
+c9s-py39:
+	podman build --build-arg=RELEASE=${RELEASE} \
+				--build-arg=DATE=${DATE} \
+				--build-arg=BASE_IMAGE=${C9S_BASE_IMAGE} \
+				--build-arg=UBI_VERSION=c9s \
+				--build-arg=PYTHON_VERSION=py39 \
+				--build-arg=PYTHON_VERSION_LONG="Python 3.9" \
+				--build-arg=CUDA="" \
+				-t runtime-images:minimal-c9s-py39_${RELEASE}_${DATE} .
+
+cuda-c9s-py39:
+	podman build --build-arg=RELEASE=${RELEASE} \
+				--build-arg=DATE=${DATE} \
+				--build-arg=BASE_IMAGE=${C9S_CUDA_BASE_IMAGE} \
+				--build-arg=UBI_VERSION=c9s \
+				--build-arg=PYTHON_VERSION=py39 \
+				--build-arg=PYTHON_VERSION_LONG="Python 3.9" \
+				--build-arg=CUDA="cuda-" \
+				-t runtime-images:cuda-minimal-c9s-py39_${RELEASE}_${DATE} .

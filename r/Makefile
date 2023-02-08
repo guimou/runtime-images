@@ -18,7 +18,7 @@ default:
 c9s-py39:
 	cd container && podman build --build-arg=RELEASE=${RELEASE} \
 				--build-arg=DATE=${DATE} \
-				--build-arg=BASE_IMAGE=runtime-images:base-c9s-py39_${RELEASE}_${DATE} \
+				--build-arg=BASE_IMAGE=runtime-images:minimal-c9s-py39_${RELEASE}_${DATE} \
 				--build-arg=UBI_VERSION=c9s \
 				--build-arg=PYTHON_VERSION=py39 \
 				--build-arg=PYTHON_VERSION_LONG="Python 3.9" \
@@ -28,7 +28,7 @@ c9s-py39:
 cuda-c9s-py39:
 	cd container && podman build --build-arg=RELEASE=${RELEASE} \
 				--build-arg=DATE=${DATE} \
-				--build-arg=BASE_IMAGE=runtime-images:cuda-base-c9s-py39_${RELEASE}_${DATE} \
+				--build-arg=BASE_IMAGE=runtime-images:cuda-minimal-c9s-py39_${RELEASE}_${DATE} \
 				--build-arg=UBI_VERSION=c9s \
 				--build-arg=PYTHON_VERSION=py39 \
 				--build-arg=PYTHON_VERSION_LONG="Python 3.9" \
