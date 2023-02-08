@@ -19,13 +19,13 @@ LABEL name="runtime-images:${CUDA}datascience-${UBI_VERSION}-${PYTHON_VERSION}_$
     io.openshift.build.image="https://quay.io/opendatahub-contrib/runtime-images:${CUDA}datascience-${UBI_VERSION}-${PYTHON_VERSION}_${RELEASE}_${DATE}"
 
 ########################
-# Datascience runtime  #
+# Datascience notebook #
 ########################
 
-WORKDIR /opt/app-root/bin/
+WORKDIR /tmp
 
 # Copying custom packages
-COPY Pipfile.lock ./
+COPY Pipfile.lock /.
 
 # Install packages and cleanup
 # (all commands are chained to minimize layer size)
@@ -34,7 +34,9 @@ RUN echo "Installing softwares and packages" && \
     micropipenv install && \
     rm -f ./Pipfile.lock && \
     # Fix permissions to support pip in Openshift environments \
-    chmod -R g+w /opt/app-root/lib/python3.9/site-packages && \
+    chmod -R g+w /opt/app-root/lib/python3.8/site-packages && \
     fix-permissions /opt/app-root -P
 
 WORKDIR /opt/app-root/src
+
+
